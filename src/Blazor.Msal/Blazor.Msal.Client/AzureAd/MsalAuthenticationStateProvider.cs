@@ -59,9 +59,9 @@ namespace Blazor.Msal.Client.AzureAd
             Console.WriteLine("azuread.initialized");
         }
 
-        public async Task SignIn()
+        public async Task SignIn(params string[] scopes)
         {
-            await _js.InvokeVoidAsync("azuread.signIn");
+            await _js.InvokeVoidAsync("azuread.signIn", new object[] { scopes });
 
             Console.WriteLine("Calling AuthenticationChanged");
 

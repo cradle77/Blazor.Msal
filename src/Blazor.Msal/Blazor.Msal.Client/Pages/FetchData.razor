@@ -8,7 +8,7 @@
 
 <AuthorizeView>
     <Authorized>
-        @if (forecasts == null)
+        @if (_forecasts == null)
         {
             <p><em>Loading...</em></p>
         }
@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var forecast in forecasts)
+                    @foreach (var forecast in _forecasts)
                     {
                         <tr>
                             <td>@forecast.Date.ToShortDateString()</td>
@@ -38,13 +38,17 @@
         }
     </Authorized>
     <NotAuthorized>
-        Please <LoginStatus></LoginStatus> before accessing this page
+        @*The AdditionalScopes parameter avoid the two separate
+        consent popups which are not allowed by browers' blockers*@
+
+        Please <LoginStatus AdditionalScopes="@_apiScope"></LoginStatus> before accessing this page
     </NotAuthorized>
 </AuthorizeView>
 
 
 @code {
-    private WeatherForecast[] forecasts;
+    private string _apiScope = "app://blazor.msal.api/api.access";
+    private WeatherForecast[] _forecasts;
 
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
@@ -61,11 +65,11 @@
 
         var token = await this.AuthenticationStateProvider.GetAccessTokenAsync(
             // passing the list of requested scopes
-            "app://blazor.msal.api/api.access");
+            _apiScope);
 
         this.Http.DefaultRequestHeaders.Authorization =
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token.AccessToken);
 
-        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("https://localhost:5101/weatherforecast");
+        _forecasts = await Http.GetJsonAsync<WeatherForecast[]>("https://localhost:5101/weatherforecast");
     }
 }

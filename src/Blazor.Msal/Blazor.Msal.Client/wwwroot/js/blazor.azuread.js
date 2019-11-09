@@ -3,8 +3,12 @@
         this.msalObj = new Msal.UserAgentApplication(msalConfig);
     };
 
-    AzureAd.prototype.signIn = function () {
-        return this.msalObj.loginPopup({});
+    AzureAd.prototype.signIn = function (scopes) {
+        var requestObj = {
+            scopes: scopes
+        };
+
+        return this.msalObj.loginPopup(requestObj);
     };
 
     AzureAd.prototype.signOut = function () {

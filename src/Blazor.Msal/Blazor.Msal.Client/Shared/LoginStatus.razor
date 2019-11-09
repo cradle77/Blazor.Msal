@@ -7,6 +7,13 @@
         <button class="btn btn-primary" @onclick="this.AuthenticationStateProvider.SignOut">Logout</button>
     </Authorized>
     <NotAuthorized>
-        <button class="btn btn-primary" @onclick="this.AuthenticationStateProvider.SignIn">Login</button>
+        <button class="btn btn-primary" @onclick="@(e => this.AuthenticationStateProvider.SignIn(this.Scopes))">Login</button>
     </NotAuthorized>
 </AuthorizeView>
+
+@code {
+    [Parameter]
+    public string AdditionalScopes { get; set; }
+
+    private string[] Scopes => this.AdditionalScopes?.Split(',');
+}
