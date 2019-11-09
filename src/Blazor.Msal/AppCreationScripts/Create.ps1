@@ -40,6 +40,8 @@ $apiApplication = New-AzureADApplication -DisplayName "Blazor.Msal.Api" `
 "Api application created:"
 $apiApplication | Select-Object -Property ObjectId, AppId, DisplayName
 
+# create service principal for the API application
+$sp = New-AzureADServicePrincipal -AppId $apiApplication.AppId
 
 # create client application
 $requiredResourcesAccess = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.RequiredResourceAccess]

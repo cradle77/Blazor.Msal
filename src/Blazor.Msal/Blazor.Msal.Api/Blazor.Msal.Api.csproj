@@ -8,5 +8,8 @@
     <ProjectReference Include="..\Blazor.Msal.Shared\Blazor.Msal.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="3.1.0-preview2.19528.8" />
+  </ItemGroup>
 
 </Project>

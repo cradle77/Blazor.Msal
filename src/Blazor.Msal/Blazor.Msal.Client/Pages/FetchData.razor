@@ -1,5 +1,6 @@
 ﻿@page "/fetchdata"
 @inject HttpClient Http
+@inject MsalAuthenticationStateProvider AuthenticationStateProvider
 
 <h1>Weather forecast</h1>
 
@@ -39,17 +40,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
-    }
+        var token = await this.AuthenticationStateProvider.GetAccessTokenAsync(
+            // passing the list of requested scopes
+            "app://blazor.msal.api/api.access");
 
-    public class WeatherForecast
-    {
-        public DateTime Date { get; set; }
+        this.Http.DefaultRequestHeaders.Authorization =
+            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token.AccessToken);
 
-        public int TemperatureC { get; set; }
-
-        public string Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("https://localhost:5101/weatherforecast");
     }
 }

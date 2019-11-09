@@ -41,7 +41,9 @@ namespace Blazor.Msal.Client.AzureAd
                 auth = new
                 {
                     clientId = config.ClientId,
-                    authority = config.Authority
+                    authority = config.Authority,
+                    // needed to avoid the issue with iFrame src
+                    redirectUri = "https://localhost:5001/"
                 },
                 cache = new
                 {
