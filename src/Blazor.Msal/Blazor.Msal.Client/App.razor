@@ -1,10 +1,41 @@
-﻿<Router AppAssembly="@typeof(Program).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-    </Found>
-    <NotFound>
-        <LayoutView Layout="@typeof(MainLayout)">
-            <p>Sorry, there's nothing at this address.</p>
-        </LayoutView>
-    </NotFound>
-</Router>
+﻿@inject MsalAuthenticationStateProvider Msal
+@inject HttpClient http
+
+@if (initialized)
+{
+    <CascadingAuthenticationState>
+        <Router AppAssembly="@typeof(Program).Assembly">
+            <Found Context="routeData">
+                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            </Found>
+            <NotFound>
+                <LayoutView Layout="@typeof(MainLayout)">
+                    <p>Sorry, there's nothing at this address.</p>
+                </LayoutView>
+            </NotFound>
+        </Router>
+    </CascadingAuthenticationState>
+}
+
+@code {
+    private bool initialized = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("App initializing");
+
+        await base.OnInitializedAsync();
+
+        Console.WriteLine("Requesting config");
+
+        var config = await http.GetJsonAsync<ClientConfig>("/config/appsettings.json");
+
+        Console.WriteLine($"Config retrieved:");
+
+        await this.Msal.InitializeAsync(config);
+
+        Console.WriteLine("App initialized");
+
+        this.initialized = true;
+    }
+}

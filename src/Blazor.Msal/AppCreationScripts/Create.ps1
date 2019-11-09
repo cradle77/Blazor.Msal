@@ -74,13 +74,12 @@ $apiSettings | Add-Member -Force -MemberType NoteProperty -Name AzureAD -Value @
     "ClientId" = $apiApplication.IdentifierUris[0]
 }
 
-Set-Content "..\Blazor.Msal.Api\appsettings.json" -Value ($apiSettings | ConvertTo-Json -Depth )
+Set-Content "..\Blazor.Msal.Api\appsettings.json" -Value ($apiSettings | ConvertTo-Json )
 
 # set configuration for the client application
 $clientSettings = @{
     ClientId = $clientApplication.AppId
     Authority = "https://login.microsoftonline.com/$tenantId"
-    ApiScope = "app://blazor.msal.api/api.access"
 }
 
 Set-Content "..\Blazor.Msal.Client\wwwroot\config\appsettings.json" -Value ($clientSettings | ConvertTo-Json)
