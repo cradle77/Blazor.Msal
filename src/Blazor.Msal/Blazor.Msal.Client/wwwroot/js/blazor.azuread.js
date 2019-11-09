@@ -8,7 +8,16 @@
             scopes: scopes
         };
 
-        return this.msalObj.loginPopup(requestObj);
+        return this.msalObj.loginPopup(requestObj)
+            .catch(function (error) {
+                // we ignore errors due to user cancelling or
+                // non granting consent. User had not logged in
+                // but we don't want to raise an exception
+                if (error.errorCode !== "user_cancelled" &&
+                    error.errorCode !== "consent_required") {
+                    throw error;
+                }
+            });
     };
 
     AzureAd.prototype.signOut = function () {

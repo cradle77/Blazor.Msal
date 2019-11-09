@@ -28,7 +28,8 @@
 
         Console.WriteLine("Requesting config");
 
-        var config = await http.GetJsonAsync<ClientConfig>("/config/appsettings.json");
+        var config = await http.GetJsonAsync<ClientConfig>(
+            $"/config/appsettings.json?{DateTime.Now.Ticks}");
 
         Console.WriteLine($"Config retrieved:");
 

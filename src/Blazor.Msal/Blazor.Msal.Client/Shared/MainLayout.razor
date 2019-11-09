@@ -6,10 +6,14 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <LoginStatus></LoginStatus>
-    </div>
+        <LoginStatus AdditionalScopes="@_apiScope"></LoginStatus>
+</div>
 
     <div class="content px-4">
         @Body
     </div>
 </div>
+
+@code {
+    private string _apiScope = "app://blazor.msal.api/api.access";
+}

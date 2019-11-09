@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -15,12 +13,15 @@ namespace Blazor.Msal.Client.AzureAd
         private IJSRuntime _js;
         private HttpClient _http;
         private NavigationManager _navigation;
+        private ConditionalInvoker _conditionalInvoker;
 
         public MsalAuthenticationStateProvider(IJSRuntime js, HttpClient http, NavigationManager navigation)
         {
             _js = js;
             _http = http;
             _navigation = navigation;
+            _conditionalInvoker = new ConditionalInvoker(
+                () => this.AuthenticationChanged());
         }
 
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -64,45 +65,38 @@ namespace Blazor.Msal.Client.AzureAd
 
         public async Task SignIn(params string[] scopes)
         {
-            await _js.InvokeVoidAsync("azuread.signIn", new object[] { scopes });
-
-            Console.WriteLine("Calling AuthenticationChanged");
-
-            await AuthenticationChanged();
+            await using (await _conditionalInvoker.InvokeIfChanged(
+                async () => (await this.GetAuthenticationStateAsync()).User.Identity.Name))
+            {
+                await _js.InvokeVoidAsync("azuread.signIn", new object[] { scopes });
+            }
         }
 
         public async Task<MsalToken> GetAccessTokenAsync(params string[] scopes)
         {
-            var originalState = await this.GetAuthenticationStateAsync();
-
-            var token = await _js.InvokeAsync<MsalToken>("azuread.acquireToken",
-                new object[] { scopes });
-            
-            // this might've changed the authentication state
-            var newState = await this.GetAuthenticationStateAsync();
-
-            if (originalState.User.Identity.Name !=
-                newState.User.Identity.Name)
+            await using (await _conditionalInvoker.InvokeIfChanged(
+                async () => (await this.GetAuthenticationStateAsync()).User.Identity.Name))
             {
-                await AuthenticationChanged();
+                var token = await _js.InvokeAsync<MsalToken>("azuread.acquireToken",
+                    new object[] { scopes });
+
+                Console.WriteLine($"AccessToken: {token?.AccessToken}");
+
+                return token;
             }
-
-            Console.WriteLine($"AccessToken: {token.AccessToken}");
-
-            return token;
         }
 
         public async Task SignOut()
         {
             await _js.InvokeVoidAsync("azuread.signOut");
 
-            Console.WriteLine("Calling AuthenticationChanged");
-
             await AuthenticationChanged();
         }
 
         public async Task AuthenticationChanged()
         {
+            Console.WriteLine("AuthenticationChanged called");
+
             var state = await GetAuthenticationStateAsync();
 
             Console.WriteLine($"AuthenticationChanged called! State is {state.User?.Identity.Name}");
