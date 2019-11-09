@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace Blazor.Msal.Client.AzureAd
     {
         private IJSRuntime _js;
         private HttpClient _http;
+        private NavigationManager _navigation;
 
-        public MsalAuthenticationStateProvider(IJSRuntime js, HttpClient http)
+        public MsalAuthenticationStateProvider(IJSRuntime js, HttpClient http, NavigationManager navigation)
         {
             _js = js;
             _http = http;
+            _navigation = navigation;
         }
 
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -43,7 +46,7 @@ namespace Blazor.Msal.Client.AzureAd
                     clientId = config.ClientId,
                     authority = config.Authority,
                     // needed to avoid the issue with iFrame src
-                    redirectUri = "https://localhost:5001/"
+                    redirectUri = _navigation.BaseUri
                 },
                 cache = new
                 {
