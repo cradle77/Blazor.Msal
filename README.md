@@ -35,6 +35,14 @@ Once the application is started, you will be able to login and grant consent to 
 
 Then, if you navigate to the *Fetch Data* page, the application will automatically acquire an Access Token and use it to call the external API.
 
+## Clean up your tenant's application registrations
+
+After the applications have been created in Azure Active Directory and you have managed to run the example, you can clean them up just by running the following script:
+
+```
+.\Cleanup.ps1 -Credential $credential -TenantId $tenantId
+```
+
 ## Bits worth looking at
 
 This projects provides a sample implementation of a Blazor `AuthenticationStateProvider` class which wraps around MSAL.js to integrate with Azure Active Directory.
