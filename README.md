@@ -31,7 +31,7 @@ Just make sure to execute both the `Blazor.Msal.Api` project and the `Blazor.Msa
 
 Once the application is started, you will be able to login and grant consent to the application by using the button at the upper right corner:
 
-![Diagram](https://github.com/cradle77/Blazor.Msal/blob/master/login.png?raw=true)
+![Login](https://github.com/cradle77/Blazor.Msal/blob/master/Login.png?raw=true)
 
 Then, if you navigate to the *Fetch Data* page, the application will automatically acquire an Access Token and use it to call the external API.
 
