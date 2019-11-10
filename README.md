@@ -45,7 +45,7 @@ After the applications have been created in Azure Active Directory and you have 
 
 ## Bits worth looking at
 
-This projects provides a sample implementation of a Blazor `AuthenticationStateProvider` class which wraps around MSAL.js to integrate with Azure Active Directory.
+This project provides a sample implementation of a Blazor `AuthenticationStateProvider` class which wraps around MSAL.js and integrates with Azure Active Directory.
 
 `MsalAuthenticationStateProvider` can be used to:
 - retrieve the authentication state of the current user
