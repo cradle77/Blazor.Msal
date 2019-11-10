@@ -29,7 +29,7 @@ If you have Visual Studio 2019 Preview and .NET Core 3.1 Preview 2 installed, it
 
 Just make sure to execute both the `Blazor.Msal.Api` project and the `Blazor.Msal.Client` application.
 
-Once the application is started, you will be able to login and grant consent to the application by using the button at the upper right corner:
+Once the application is started, you will be able to login and grant consent to it by using the button at the upper right corner:
 
 ![Login](https://github.com/cradle77/Blazor.Msal/blob/master/Login.png?raw=true)
 
