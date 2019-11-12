@@ -1,4 +1,4 @@
-﻿using Blazor.Msal.Client.AzureAd;
+﻿using Des.Blazor.Msal.Authorization;
 
 namespace Blazor.Msal.Client
 {

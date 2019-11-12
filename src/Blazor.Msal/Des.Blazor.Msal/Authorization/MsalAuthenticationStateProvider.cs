@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Des.Blazor.Msal.Utils;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System;
@@ -6,7 +7,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Blazor.Msal.Client.AzureAd
+namespace Des.Blazor.Msal.Authorization
 {
     public class MsalAuthenticationStateProvider : AuthenticationStateProvider
     {
