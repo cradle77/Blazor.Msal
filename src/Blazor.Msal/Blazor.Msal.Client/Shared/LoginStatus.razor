@@ -4,10 +4,10 @@
 <AuthorizeView>
     <Authorized>
         <span class="mr-5">Welcome <b>@context.User.Identity.Name</b></span>
-        <button class="btn btn-primary" @onclick="this.AuthenticationStateProvider.SignOut">Logout</button>
+        <button class="btn btn-primary" @onclick="this.AuthenticationStateProvider.SignOutAsync">Logout</button>
     </Authorized>
     <NotAuthorized>
-        <button class="btn btn-primary" @onclick="@(e => this.AuthenticationStateProvider.SignIn(this.Scopes))">Login</button>
+        <button class="btn btn-primary" @onclick="@(e => this.AuthenticationStateProvider.SignInAsync(this.Scopes))">Login</button>
     </NotAuthorized>
 </AuthorizeView>
 

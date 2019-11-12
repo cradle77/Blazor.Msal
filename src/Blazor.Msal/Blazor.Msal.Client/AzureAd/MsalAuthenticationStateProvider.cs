@@ -63,7 +63,7 @@ namespace Blazor.Msal.Client.AzureAd
             Console.WriteLine("azuread.initialized");
         }
 
-        public async Task SignIn(params string[] scopes)
+        public async Task SignInAsync(params string[] scopes)
         {
             await using (await _conditionalInvoker.InvokeIfChanged(
                 async () => (await this.GetAuthenticationStateAsync()).User.Identity.Name))
@@ -86,7 +86,7 @@ namespace Blazor.Msal.Client.AzureAd
             }
         }
 
-        public async Task SignOut()
+        public async Task SignOutAsync()
         {
             await _js.InvokeVoidAsync("azuread.signOut");
 
