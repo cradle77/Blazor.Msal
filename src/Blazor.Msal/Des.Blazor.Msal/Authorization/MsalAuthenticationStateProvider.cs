@@ -15,18 +15,24 @@ namespace Des.Blazor.Msal.Authorization
         private HttpClient _http;
         private NavigationManager _navigation;
         private ConditionalInvoker _conditionalInvoker;
+        private IConfigProvider _configProvider;
 
-        public MsalAuthenticationStateProvider(IJSRuntime js, HttpClient http, NavigationManager navigation)
+        public bool IsInitialized { get; private set; }
+
+        public MsalAuthenticationStateProvider(IJSRuntime js, HttpClient http, NavigationManager navigation, IConfigProvider configProvider)
         {
             _js = js;
             _http = http;
             _navigation = navigation;
             _conditionalInvoker = new ConditionalInvoker(
                 () => this.AuthenticationChanged());
+            _configProvider = configProvider;
         }
 
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
+            await this.EnsureInitializedAsync();
+
             var account = await _js.InvokeAsync<MsalAccount>("azuread.getAccount");
 
             if (account == null)
@@ -62,10 +68,14 @@ namespace Des.Blazor.Msal.Authorization
             await _js.InvokeVoidAsync("azuread.initialize", new object[] { msalConfig });
 
             Console.WriteLine("azuread.initialized");
+
+            this.IsInitialized = true;
         }
 
         public async Task SignInAsync(params string[] scopes)
         {
+            await this.EnsureInitializedAsync();
+
             await using (await _conditionalInvoker.InvokeIfChanged(
                 async () => (await this.GetAuthenticationStateAsync()).User.Identity.Name))
             {
@@ -75,6 +85,8 @@ namespace Des.Blazor.Msal.Authorization
 
         public async Task<MsalToken> GetAccessTokenAsync(params string[] scopes)
         {
+            await this.EnsureInitializedAsync();
+
             await using (await _conditionalInvoker.InvokeIfChanged(
                 async () => (await this.GetAuthenticationStateAsync()).User.Identity.Name))
             {
@@ -89,9 +101,23 @@ namespace Des.Blazor.Msal.Authorization
 
         public async Task SignOutAsync()
         {
+            await this.EnsureInitializedAsync();
+
             await _js.InvokeVoidAsync("azuread.signOut");
 
             await AuthenticationChanged();
+        }
+
+        private async Task EnsureInitializedAsync()
+        {
+            if (this.IsInitialized)
+            {
+                return;
+            }
+
+            var config = await _configProvider.GetConfigurationAsync();
+
+            await this.InitializeAsync(config);
         }
 
         public async Task AuthenticationChanged()
