@@ -1,4 +1,4 @@
-﻿using Des.Blazor.Msal.Authorization;
+﻿using Des.Blazor.Authorization.Msal;
 
 namespace Blazor.Msal.Client
 {

@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Blazor.Msal.Shared\Blazor.Msal.Shared.csproj" />
-    <ProjectReference Include="..\Des.Blazor.Msal\Des.Blazor.Msal.csproj" />
+    <ProjectReference Include="..\Des.Blazor.Authorization.Msal\Des.Blazor.Authorization.Msal.csproj" />
   </ItemGroup>
 
 </Project>

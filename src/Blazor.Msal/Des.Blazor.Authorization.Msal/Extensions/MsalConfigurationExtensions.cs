@@ -1,4 +1,4 @@
-﻿using Des.Blazor.Msal.Authorization;
+﻿using Des.Blazor.Authorization.Msal;
 using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddAzureActiveDirectory(this IServiceCollection services, Func<IServiceProvider, Task<IMsalConfig>> configurator)
         {
-            services.AddScoped<IConfigProvider>(sp => 
+            services.AddScoped<IConfigProvider<IMsalConfig>>(sp => 
             {
-                return new DelegateConfigProvider(sp, configurator);
+                return new DelegateConfigProvider<IMsalConfig>(sp, configurator);
             });
 
             services.AddScoped<MsalAuthenticationStateProvider>();

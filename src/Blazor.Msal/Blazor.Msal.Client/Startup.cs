@@ -1,3 +1,4 @@
+using Des.Blazor.Authorization.Msal;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +18,7 @@ namespace Blazor.Msal.Client
 
                 var config = await http.GetJsonAsync<ClientConfig>($"/config/appsettings.json?{DateTime.Now.Ticks}");
 
-                return config;
+                return (IMsalConfig)config;
             });
         }
 

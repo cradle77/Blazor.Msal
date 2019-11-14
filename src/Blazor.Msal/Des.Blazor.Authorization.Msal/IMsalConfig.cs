@@ -1,4 +1,4 @@
-﻿namespace Des.Blazor.Msal.Authorization
+﻿namespace Des.Blazor.Authorization.Msal
 {
     public interface IMsalConfig
     {

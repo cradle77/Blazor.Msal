@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Des.Blazor.Msal.Authorization
+namespace Des.Blazor.Authorization.Msal
 {
     public class MsalAuthenticationStateProvider : AuthenticationStateProvider
     {
@@ -15,11 +15,11 @@ namespace Des.Blazor.Msal.Authorization
         private HttpClient _http;
         private NavigationManager _navigation;
         private ConditionalInvoker _conditionalInvoker;
-        private IConfigProvider _configProvider;
+        private IConfigProvider<IMsalConfig> _configProvider;
 
         public bool IsInitialized { get; private set; }
 
-        public MsalAuthenticationStateProvider(IJSRuntime js, HttpClient http, NavigationManager navigation, IConfigProvider configProvider)
+        public MsalAuthenticationStateProvider(IJSRuntime js, HttpClient http, NavigationManager navigation, IConfigProvider<IMsalConfig> configProvider)
         {
             _js = js;
             _http = http;

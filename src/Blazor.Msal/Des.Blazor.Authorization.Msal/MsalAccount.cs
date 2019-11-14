@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace Des.Blazor.Msal.Authorization
+namespace Des.Blazor.Authorization.Msal
 {
     internal class MsalAccount
     {
