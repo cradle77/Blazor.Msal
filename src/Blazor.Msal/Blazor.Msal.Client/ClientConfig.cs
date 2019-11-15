@@ -1,4 +1,4 @@
-﻿using Blazor.Msal.Client.AzureAd;
+﻿using Des.Blazor.Authorization.Msal;
 
 namespace Blazor.Msal.Client
 {
@@ -6,5 +6,6 @@ namespace Blazor.Msal.Client
     {
         public string Authority { get; set; }
         public string ClientId { get; set; }
+        public LoginModes LoginMode => LoginModes.Redirect;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Blazor.Msal.Client.AzureAd
+﻿namespace Des.Blazor.Authorization.Msal
 {
     public class MsalToken
     {

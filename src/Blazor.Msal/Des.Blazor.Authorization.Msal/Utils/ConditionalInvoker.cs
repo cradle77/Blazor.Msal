@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Blazor.Msal.Client.AzureAd
+namespace Des.Blazor.Msal.Utils
 {
     internal class ConditionalInvoker
     {
