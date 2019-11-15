@@ -16,6 +16,7 @@ namespace Des.Blazor.Authorization.Msal
         private NavigationManager _navigation;
         private ConditionalInvoker _conditionalInvoker;
         private IConfigProvider<IMsalConfig> _configProvider;
+        private string _loginMode;
 
         public bool IsInitialized { get; private set; }
 
@@ -54,7 +55,8 @@ namespace Des.Blazor.Authorization.Msal
                     clientId = config.ClientId,
                     authority = config.Authority,
                     // needed to avoid the issue with iFrame src
-                    redirectUri = _navigation.BaseUri
+                    redirectUri = _navigation.BaseUri,
+                    navigateToLoginRequestUrl = false
                 },
                 cache = new
                 {
@@ -62,6 +64,8 @@ namespace Des.Blazor.Authorization.Msal
                     storeAuthStateInCookie = true
                 }
             };
+
+            _loginMode = Enum.GetName(typeof(LoginModes), config.LoginMode);
 
             Console.WriteLine("azuread.initializing");
 
@@ -80,7 +84,7 @@ namespace Des.Blazor.Authorization.Msal
             await using (await _conditionalInvoker.InvokeIfChanged(
                 async () => (await this.GetAuthenticationStateAsync()).User.Identity.Name))
             {
-                await _js.InvokeVoidAsync("azuread.signIn", new object[] { scopes });
+                await _js.InvokeVoidAsync("azuread.signIn" + _loginMode, new object[] { scopes });
             }
         }
 
@@ -91,7 +95,7 @@ namespace Des.Blazor.Authorization.Msal
             await using (await _conditionalInvoker.InvokeIfChanged(
                 async () => (await this.GetAuthenticationStateAsync()).User.Identity.Name))
             {
-                var token = await _js.InvokeAsync<MsalToken>("azuread.acquireToken",
+                var token = await _js.InvokeAsync<MsalToken>("azuread.acquireToken" + _loginMode,
                     new object[] { scopes });
 
                 Console.WriteLine($"AccessToken: {token?.AccessToken}");
@@ -121,7 +125,6 @@ namespace Des.Blazor.Authorization.Msal
             await this.InitializeAsync(config);
         }
 
-        [JSInvokable]
         public async Task AuthenticationChanged()
         {
             Console.WriteLine("AuthenticationChanged called");
@@ -130,6 +133,12 @@ namespace Des.Blazor.Authorization.Msal
 
             Console.WriteLine($"AuthenticationChanged called! State is {state.User?.Identity.Name}");
             this.NotifyAuthenticationStateChanged(Task.FromResult(state));
+        }
+
+        [JSInvokable]
+        public async Task RedirectToSourceUrl(string url)
+        {
+            _navigation.NavigateTo(url);
         }
     }
 }

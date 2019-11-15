@@ -4,5 +4,7 @@
     {
         string ClientId { get; }
         string Authority { get; }
+
+        LoginModes LoginMode { get; }
     }
 }
