@@ -65,7 +65,8 @@ namespace Des.Blazor.Authorization.Msal
 
             Console.WriteLine("azuread.initializing");
 
-            await _js.InvokeVoidAsync("azuread.initialize", new object[] { msalConfig });
+            await _js.InvokeVoidAsync("azuread.initialize", 
+                new object[] { msalConfig, DotNetObjectReference.Create(this) });
 
             Console.WriteLine("azuread.initialized");
 
@@ -120,6 +121,7 @@ namespace Des.Blazor.Authorization.Msal
             await this.InitializeAsync(config);
         }
 
+        [JSInvokable]
         public async Task AuthenticationChanged()
         {
             Console.WriteLine("AuthenticationChanged called");
