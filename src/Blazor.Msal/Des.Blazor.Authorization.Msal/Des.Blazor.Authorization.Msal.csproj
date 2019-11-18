@@ -12,6 +12,14 @@
     <Description>This package is a wrapper over MSAL.js to implement OpenID Connect and OAuth2 on a Blazor WebAssembly application</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\blazor.azuread.js" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.0-preview2.19528.8" />
