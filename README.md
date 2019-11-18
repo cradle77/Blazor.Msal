@@ -1,4 +1,9 @@
 # Blazor.Msal
+
+[![Build Status](https://des.visualstudio.com/Blazor.Msal/_apis/build/status/Blazor.Msal-CI?branchName=master)](https://des.visualstudio.com/Blazor.Msal/_build/latest?definitionId=48&branchName=master)
+
+![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Des.Blazor.Authorization.Msal)
+
 This repository contains an example on how to integrate a Single Page Web Application made in Blazor WebAssembly with Azure Active Directory. It allows to authenticate the user and then acquire an access token to make a secure call to an external API:
 
 ![Diagram](https://github.com/cradle77/Blazor.Msal/blob/master/Diagram.png?raw=true)
