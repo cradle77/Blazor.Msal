@@ -6,6 +6,10 @@
     <LangVersion>8.0</LangVersion>
     <AssemblyName>Des.Blazor.Authorization.Msal</AssemblyName>
     <RootNamespace>Des.Blazor.Authorization.Msal</RootNamespace>
+    <Version>0.1</Version>
+    <Authors>Marco De Sanctis</Authors>
+    <Company>Cloud Consult London Ltd</Company>
+    <Description>This package is a wrapper over MSAL.js to implement OpenID Connect and OAuth2 on a Blazor WebAssembly application</Description>
   </PropertyGroup>
 
 
