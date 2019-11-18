@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace Blazor.Msal.Client.AzureAd
+namespace Des.Blazor.Authorization.Msal
 {
-    public class MsalAccount
+    internal class MsalAccount
     {
         public string AccountIdentifier { get; set; }
         public string Username { get; set; }

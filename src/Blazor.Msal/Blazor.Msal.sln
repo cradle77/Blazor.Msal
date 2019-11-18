@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppCreationScripts", "AppCr
 		AppCreationScripts\Create.ps1 = AppCreationScripts\Create.ps1
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Des.Blazor.Authorization.Msal", "Des.Blazor.Authorization.Msal\Des.Blazor.Authorization.Msal.csproj", "{9EDA3956-FE10-4B51-971F-436023EA9ABB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F6393FF6-518D-4CB2-B4F4-978D965F7475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6393FF6-518D-4CB2-B4F4-978D965F7475}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6393FF6-518D-4CB2-B4F4-978D965F7475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EDA3956-FE10-4B51-971F-436023EA9ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EDA3956-FE10-4B51-971F-436023EA9ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EDA3956-FE10-4B51-971F-436023EA9ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EDA3956-FE10-4B51-971F-436023EA9ABB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

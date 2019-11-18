@@ -1,8 +1,10 @@
-﻿namespace Blazor.Msal.Client.AzureAd
+﻿namespace Des.Blazor.Authorization.Msal
 {
     public interface IMsalConfig
     {
         string ClientId { get; }
         string Authority { get; }
+
+        LoginModes LoginMode { get; }
     }
 }

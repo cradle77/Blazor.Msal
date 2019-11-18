@@ -1,7 +1,9 @@
-using Blazor.Msal.Client.AzureAd;
-using Microsoft.AspNetCore.Components.Authorization;
+using Des.Blazor.Authorization.Msal;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Net.Http;
 
 namespace Blazor.Msal.Client
 {
@@ -10,10 +12,13 @@ namespace Blazor.Msal.Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthorizationCore();
-            services.AddScoped<MsalAuthenticationStateProvider>();
-            services.AddScoped<AuthenticationStateProvider>(s =>
+            services.AddAzureActiveDirectory(async sp => 
             {
-                return s.GetService<MsalAuthenticationStateProvider>();
+                var http = sp.GetService<HttpClient>();
+
+                var config = await http.GetJsonAsync<ClientConfig>($"/config/appsettings.json?{DateTime.Now.Ticks}");
+
+                return (IMsalConfig)config;
             });
         }
 
