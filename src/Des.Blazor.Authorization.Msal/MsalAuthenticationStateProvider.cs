@@ -136,7 +136,7 @@ namespace Des.Blazor.Authorization.Msal
         }
 
         [JSInvokable]
-        public async Task RedirectToSourceUrl(string url)
+        public void RedirectToSourceUrl(string url)
         {
             _navigation.NavigateTo(url);
         }

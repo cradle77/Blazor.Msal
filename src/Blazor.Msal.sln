@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29505.145
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Msal.Client", "Blazor.Msal.Client\Blazor.Msal.Client.csproj", "{C85EB13E-0C15-4AAB-95C2-C450432606BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Msal.Client", "Sample\Blazor.Msal.Client\Blazor.Msal.Client.csproj", "{C85EB13E-0C15-4AAB-95C2-C450432606BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Msal.Api", "Blazor.Msal.Api\Blazor.Msal.Api.csproj", "{62214484-3BAC-4211-8EDD-63917E4FAAD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Msal.Api", "Sample\Blazor.Msal.Api\Blazor.Msal.Api.csproj", "{62214484-3BAC-4211-8EDD-63917E4FAAD3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Msal.Shared", "Blazor.Msal.Shared\Blazor.Msal.Shared.csproj", "{F6393FF6-518D-4CB2-B4F4-978D965F7475}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Msal.Shared", "Sample\Blazor.Msal.Shared\Blazor.Msal.Shared.csproj", "{F6393FF6-518D-4CB2-B4F4-978D965F7475}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppCreationScripts", "AppCreationScripts", "{E01581E4-B549-433C-BFC8-DBC2312E7E34}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,6 +16,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppCreationScripts", "AppCr
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Des.Blazor.Authorization.Msal", "Des.Blazor.Authorization.Msal\Des.Blazor.Authorization.Msal.csproj", "{9EDA3956-FE10-4B51-971F-436023EA9ABB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{697E257E-DBD8-4FEE-BA41-5F5F86107159}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{08CDF105-CDD7-4522-845E-BF1885604DAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +46,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C85EB13E-0C15-4AAB-95C2-C450432606BE} = {08CDF105-CDD7-4522-845E-BF1885604DAF}
+		{62214484-3BAC-4211-8EDD-63917E4FAAD3} = {08CDF105-CDD7-4522-845E-BF1885604DAF}
+		{F6393FF6-518D-4CB2-B4F4-978D965F7475} = {08CDF105-CDD7-4522-845E-BF1885604DAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8BCD0D4-19F8-4921-BBB0-EA767F0926E7}
