@@ -10,8 +10,13 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         private static IServiceCollection AddBaseServices(this IServiceCollection services)
         {
+            services.AddScoped<IMsal, Msal>();
             services.AddScoped<MsalAuthenticationStateProvider>();
             services.AddScoped<AuthenticationStateProvider>(s =>
+            {
+                return s.GetService<MsalAuthenticationStateProvider>();
+            });
+            services.AddScoped<IAuthenticationManager>(s =>
             {
                 return s.GetService<MsalAuthenticationStateProvider>();
             });

@@ -1,6 +1,6 @@
 ﻿@page "/fetchdata"
 @inject HttpClient Http
-@inject MsalAuthenticationStateProvider AuthenticationStateProvider
+@inject IAuthenticationManager AuthenticationManager
 
 <h1>Weather forecast</h1>
 
@@ -63,7 +63,7 @@
             return;
         }
 
-        var token = await this.AuthenticationStateProvider.GetAccessTokenAsync(
+        var token = await this.AuthenticationManager.GetAccessTokenAsync(
             // passing the list of requested scopes
             _apiScope);
 
