@@ -14,7 +14,7 @@ namespace Des.Blazor.Authorization.Msal
         public MsalAuthenticationStateProvider(IMsal msal)
         {
             _conditionalInvoker = new ConditionalInvoker(
-                () => this.AuthenticationChanged());
+                () => this.AuthenticationChangedAsync());
             _msal = msal;
         }
 
@@ -58,10 +58,10 @@ namespace Des.Blazor.Authorization.Msal
         {
             await _msal.SignOutAsync();
 
-            await AuthenticationChanged();
+            await AuthenticationChangedAsync();
         }
 
-        public async Task AuthenticationChanged()
+        private async Task AuthenticationChangedAsync()
         {
             Console.WriteLine("AuthenticationChanged called");
 

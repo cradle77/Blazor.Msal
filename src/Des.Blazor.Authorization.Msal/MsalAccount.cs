@@ -12,6 +12,11 @@ namespace Des.Blazor.Authorization.Msal
         public string Name { get; set; }
         public Dictionary<string, object> IdToken { get; set; }
 
+        public MsalAccount()
+        {
+            this.IdToken = new Dictionary<string, object>();
+        }
+
         public override string ToString()
         {
             return this.Username;
