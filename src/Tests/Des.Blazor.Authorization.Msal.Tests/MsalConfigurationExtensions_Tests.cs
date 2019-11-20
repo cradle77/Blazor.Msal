@@ -62,8 +62,9 @@ namespace Des.Blazor.Authorization.Msal.Tests
             services.AddAzureActiveDirectory(configurator);
 
             Assert.Contains(services, s => s.ServiceType == typeof(AuthenticationStateProvider));
-            Assert.Contains(services, s => s.ServiceType == typeof(MsalAuthenticationStateProvider));
+            Assert.Contains(services, s => s.ServiceType == typeof(IAuthenticationManager));
             Assert.Contains(services, s => s.ServiceType == typeof(IConfigProvider<IMsalConfig>));
+            Assert.Contains(services, s => s.ServiceType == typeof(IMsal));
         }
 
         [Fact]
@@ -85,10 +86,10 @@ namespace Des.Blazor.Authorization.Msal.Tests
 
             var provider = services.BuildServiceProvider();
 
-            var msalAuthenticationState = provider.GetService<MsalAuthenticationStateProvider>();
+            var authenticationManager = provider.GetService<IAuthenticationManager>();
             var authenticationState = provider.GetService<AuthenticationStateProvider>();
 
-            Assert.Same(msalAuthenticationState, authenticationState);            
+            Assert.Same(authenticationManager, authenticationState);            
         }
     }
 }
