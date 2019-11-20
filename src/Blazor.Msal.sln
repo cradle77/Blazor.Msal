@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{697E257E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{08CDF105-CDD7-4522-845E-BF1885604DAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Des.Blazor.Authorization.Msal.Tests", "Tests\Des.Blazor.Authorization.Msal.Tests\Des.Blazor.Authorization.Msal.Tests.csproj", "{F0E27600-7A39-43CB-BAEF-E1DD582490DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{9EDA3956-FE10-4B51-971F-436023EA9ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EDA3956-FE10-4B51-971F-436023EA9ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EDA3956-FE10-4B51-971F-436023EA9ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0E27600-7A39-43CB-BAEF-E1DD582490DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0E27600-7A39-43CB-BAEF-E1DD582490DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0E27600-7A39-43CB-BAEF-E1DD582490DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0E27600-7A39-43CB-BAEF-E1DD582490DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{C85EB13E-0C15-4AAB-95C2-C450432606BE} = {08CDF105-CDD7-4522-845E-BF1885604DAF}
 		{62214484-3BAC-4211-8EDD-63917E4FAAD3} = {08CDF105-CDD7-4522-845E-BF1885604DAF}
 		{F6393FF6-518D-4CB2-B4F4-978D965F7475} = {08CDF105-CDD7-4522-845E-BF1885604DAF}
+		{F0E27600-7A39-43CB-BAEF-E1DD582490DF} = {697E257E-DBD8-4FEE-BA41-5F5F86107159}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8BCD0D4-19F8-4921-BBB0-EA767F0926E7}
