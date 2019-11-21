@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using Moq;
+using Moq.Protected;
 using System;
 using System.Linq;
 using System.Net.Cache;
 using System.Net.Http;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -90,6 +93,45 @@ namespace Des.Blazor.Authorization.Msal.Tests
             var authenticationState = provider.GetService<AuthenticationStateProvider>();
 
             Assert.Same(authenticationManager, authenticationState);            
+        }
+
+        [Fact]
+        public async Task AddAzureActiveDirectory_WithUri_FetchesConfigFromUri()
+        {
+            var services = new ServiceCollection();
+
+            var jsRuntime = new Mock<IJSRuntime>();
+            services.AddTransient(sp => jsRuntime.Object);
+
+            var config = new TestConfig();
+            var json = JsonSerializer.Serialize(config);
+
+            var httpResponse = new HttpResponseMessage()
+            {
+                Content = new StringContent(json)
+            };
+
+            var httpMessageHandler = new Mock<HttpMessageHandler>();
+            httpMessageHandler
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+                .Returns(Task.FromResult(httpResponse));
+
+            services.AddTransient(sp => new HttpClient(httpMessageHandler.Object));
+
+            var navigationManager = new TestNavigationManager();
+            services.AddTransient<NavigationManager>(sp => navigationManager);
+
+            services.AddAzureActiveDirectory(new Uri("config/config.json", UriKind.Relative));
+
+            var provider = services.BuildServiceProvider();
+            var configurator = provider.GetService<IConfigProvider<IMsalConfig>>();
+
+            var result = await configurator.GetConfigurationAsync();
+
+            Assert.Equal(config.ClientId, result.ClientId);
+            Assert.Equal(config.Authority, result.Authority);
+            Assert.Equal(config.LoginMode, result.LoginMode);
         }
     }
 }

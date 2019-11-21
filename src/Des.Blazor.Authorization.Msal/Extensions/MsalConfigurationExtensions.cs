@@ -1,7 +1,10 @@
 ﻿using Des.Blazor.Authorization.Msal;
 using Des.Blazor.Authorization.Msal.Utils;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using System;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -29,6 +32,31 @@ namespace Microsoft.Extensions.DependencyInjection
             Guard.ThrowIfNull(config, nameof(config));
 
             services.AddAzureActiveDirectory(sp => Task.FromResult(config));
+
+            return services;
+        }
+
+        public static IServiceCollection AddAzureActiveDirectory(this IServiceCollection services, Uri configUri)
+        {
+            services.AddAzureActiveDirectory(async sp => 
+            {
+                if (!configUri.IsAbsoluteUri)
+                {
+                    var manager = sp.GetService<NavigationManager>();
+                    var baseUri = new Uri(manager.BaseUri);
+                    configUri = new Uri(baseUri, configUri);
+                }
+
+                var http = sp.GetService<HttpClient>();
+
+                var response = await http.GetAsync(configUri);
+
+                response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<MsalConfig>(json);
+            });
 
             return services;
         }
