@@ -4,6 +4,8 @@
 
 ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Des.Blazor.Authorization.Msal)
 
+> _.NET Core 3.1 Preview 3 supported_
+
 This NuGet package adds support to Azure Active Directory to your Blazor Web Assembly application. It allows  to authenticate the user and then acquire an access token to make a secure call to an external API:
 
 ![Diagram](https://github.com/cradle77/Blazor.Msal/blob/master/Diagram.png?raw=true)
@@ -203,9 +205,9 @@ The script will also set the configuration files in the solution to interact wit
 
 ## Build and run the code
 
-The solution is currently based on .NET Core 3.1 Preview 2. I'll keep updating it when new preview versions become available.
+The solution is currently based on .NET Core 3.1 Preview 3. I'll keep updating it when new preview versions become available.
 
-If you have Visual Studio 2019 Preview and .NET Core 3.1 Preview 2 installed, it should compile and run just fine. 
+If you have Visual Studio 2019 Preview and .NET Core 3.1 Preview 3 installed, it should compile and run just fine. 
 
 Just make sure to execute both the `Blazor.Msal.Api` project and the `Blazor.Msal.Client` application.
 
