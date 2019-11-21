@@ -1,4 +1,4 @@
-# Des.Blazor.Authorization.AzureAD
+# Des.Blazor.Authorization.Msal
 
 [![Build Status](https://des.visualstudio.com/Blazor.Msal/_apis/build/status/Blazor.Msal-CI?branchName=master)](https://des.visualstudio.com/Blazor.Msal/_build/latest?definitionId=48&branchName=master)
 
