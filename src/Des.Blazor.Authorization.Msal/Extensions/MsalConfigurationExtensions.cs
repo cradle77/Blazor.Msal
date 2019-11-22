@@ -49,11 +49,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 var http = sp.GetService<HttpClient>();
 
-                var response = await http.GetAsync(configUri);
-
-                response.EnsureSuccessStatusCode();
-
-                var json = await response.Content.ReadAsStringAsync();
+                var json = await http.GetStringAsync(configUri.ToString());
 
                 return JsonSerializer.Deserialize<MsalConfig>(json);
             });

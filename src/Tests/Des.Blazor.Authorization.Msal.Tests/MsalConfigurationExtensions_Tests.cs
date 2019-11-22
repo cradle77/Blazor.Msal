@@ -104,7 +104,11 @@ namespace Des.Blazor.Authorization.Msal.Tests
             services.AddTransient(sp => jsRuntime.Object);
 
             var config = new TestConfig();
-            var json = JsonSerializer.Serialize(config);
+            var json =
+@"{
+  ""Authority"":  ""https://myauthority.com/"",
+  ""ClientId"":  ""12345""
+}";
 
             var httpResponse = new HttpResponseMessage()
             {
