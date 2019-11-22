@@ -47,15 +47,9 @@ namespace Microsoft.Extensions.DependencyInjection
                     configUri = new Uri(baseUri, configUri);
                 }
 
-                Console.WriteLine("Inside fetch");
-
                 var http = sp.GetService<HttpClient>();
 
-                Console.WriteLine($"Got HttpClient, calling {configUri}");
-
                 var json = await http.GetStringAsync(configUri.ToString());
-
-                Console.WriteLine($"Json received: {json}");
 
                 return JsonSerializer.Deserialize<MsalConfig>(json);
             });
