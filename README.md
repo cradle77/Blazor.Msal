@@ -4,7 +4,7 @@
 
 ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Des.Blazor.Authorization.Msal)
 
-> _.NET Core 3.1 Preview 3 supported_
+> _Updated to Blazor .NET Core 3.1 Preview 4_
 
 This NuGet package adds support to Azure Active Directory to your Blazor Web Assembly application. It allows  to authenticate the user and then acquire an access token to make a secure call to an external API:
 
@@ -24,14 +24,17 @@ The first step is to reference the NuGet package on the *Blazor Client* project:
 Install-Package Des.Blazor.Authorization.Msal
 ```
 
-Then we need to include MSAL.js in *index.html* page, before the reference to blazor.webassembly.js. This could either be a static file we include to our project, or just a link pointing to a CDN URL:
+Then we need to include MSAL.js in *index.html* page, before the reference to blazor.webassembly.js *and the script from the component library*. This could either be a static file we include to our project, or just a link pointing to a CDN URL:
 
 ```
     ...
     <script src="https://alcdn.msftauth.net/lib/1.1.3/js/msal.js"></script>
+    <script src="_content/Des.Blazor.Authorization.Msal/js/blazor.azuread.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
 ```
+
+> _*Note*: this has changed since Preview2: automatic script embedding doesn't work anymore, please remember to add the script reference manually_
 
 ### 2. Register the services and configure the authentication
 
